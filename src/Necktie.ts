@@ -115,13 +115,9 @@ export class Necktie {
     });
   }
 
-  private _unbindNodes(nodes: NodeList) {
-    nodes.forEach((node) => {
+  private _unbindNodes(nodes: NodeList | Array<Node>) {
+    nodes.forEach((node: Node) => {
       if (node.nodeType !== Node.ELEMENT_NODE) {
-        return;
-      }
-
-      if (!this._nodesToBinds.has(node)) {
         return;
       }
 
@@ -129,6 +125,14 @@ export class Necktie {
 
       binds.forEach((binding) => binding.destroy(node));
       this._nodesToBinds.delete(node);
+
+      const remainingNodes = Array.from(this._nodesToBinds.keys()).filter((remainingNode) =>
+        node.contains(remainingNode)
+      );
+
+      if (remainingNodes.length) {
+        this._unbindNodes(remainingNodes);
+      }
     });
   }
 
