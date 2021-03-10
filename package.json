@@ -1,6 +1,6 @@
 {
   "name": "@lesniewski.pro/necktie",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/necktie.cjs.js",
   "module": "dist/necktie.esm.js",
   "browser": "dist/necktie.umd.js",
