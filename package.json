@@ -1,5 +1,5 @@
 {
-  "name": "necktie",
+  "name": "@lesniewski.pro/necktie",
   "version": "1.0.0",
   "main": "dist/necktie.cjs.js",
   "module": "dist/necktie.esm.js",
