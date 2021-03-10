@@ -105,12 +105,13 @@ class Necktie {
             if (node.nodeType !== Node.ELEMENT_NODE) {
                 return;
             }
-            if (!this._nodesToBinds.has(node)) {
-                return;
-            }
             const binds = this._nodesToBinds.get(node) || [];
             binds.forEach((binding) => binding.destroy(node));
             this._nodesToBinds.delete(node);
+            const remainingNodes = Array.from(this._nodesToBinds.keys()).filter((remainingNode) => node.contains(remainingNode));
+            if (remainingNodes.length) {
+                this._unbindNodes(remainingNodes);
+            }
         });
     }
     _rebindNode(node) {
