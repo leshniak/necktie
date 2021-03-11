@@ -3,6 +3,7 @@ import { Binding } from './Binding';
 import { Callback } from './Callback';
 
 const MAX_UNBIND_DEPTH = 1;
+
 export class Necktie {
   private readonly _window: Window;
   private readonly _document: Document;

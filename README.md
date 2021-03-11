@@ -1,6 +1,6 @@
 # 👔 Necktie – a simple DOM binding tool
 
-`Necktie` is a library that binds your logic to the **Document Object Model** elements in an easy way. It has only `~3 kB` (UMD, minified).
+`Necktie` is a library that binds your logic to the **Document Object Model** elements in an easy way. It has only `~ 3kB` (UMD, minified).
 
 
 ## How it works
@@ -29,8 +29,9 @@ necktie.bind('.form-component input[data-name]', (node) => {
 
 ## Installation
 
-Using npm: `npm install @lesniewski.pro/necktie`.
-Using yarn: `yarn add @lesniewski.pro/necktie`.
+Using:
+- npm: `npm install @lesniewski.pro/necktie`
+- yarn: `yarn add @lesniewski.pro/necktie`
 
 
 ## Documentation
@@ -49,12 +50,12 @@ The library comes with CJS, ESM and UMD modules. **TypeScript** types are also a
 | `bind(selector: string, callback: Callback): this`                     | Binds a callback function with a given selector.        |
 | `bindClass(selector: string, BindableComponent: Bindable): this`       | Binds a `Bindable` class with a given selector.         |
 | `observeAttributes(isEnabled?: boolean): this`                         | Looks for attributes changes, for example `class` or `data-*`. Rebinds registered functions if necessary. **WARNING!** Use with caution, this might be expensive. |
-| `startListening(): this`                                               | Runs callbacks or Bindable classes on registered selectors, starts listening for DOM changes. |
+| `startListening(): this`                                               | Runs callbacks or `Bindable` classes on registered selectors, starts listening for DOM changes. |
 
 #### `Bindable` class
 | Method                                                                | Description                                             |
 | --------------------------------------------------------------------- | ---                                                     |
-| `constructor(node?: Node): this`                                      | Creates a new Bindable instance                         |
+| `constructor(node?: Node): this`                                      | Creates a new `Bindable` instance.                       |
 |                                                                       |                                                         |
 | `destroy(destroyedNode? Node): void`                                  | A clean up method, called when a DOM element has been removed. |
 
