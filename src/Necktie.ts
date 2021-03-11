@@ -2,6 +2,7 @@ import { Bindable } from './Bindable';
 import { Binding } from './Binding';
 import { Callback } from './Callback';
 
+const MAX_UNBIND_DEPTH = 1;
 export class Necktie {
   private readonly _window: Window;
   private readonly _document: Document;
@@ -115,7 +116,7 @@ export class Necktie {
     });
   }
 
-  private _unbindNodes(nodes: NodeList | Array<Node>) {
+  private _unbindNodes(nodes: NodeList | Array<Node>, depth = 0) {
     nodes.forEach((node: Node) => {
       if (node.nodeType !== Node.ELEMENT_NODE) {
         return;
@@ -126,12 +127,16 @@ export class Necktie {
       binds.forEach((binding) => binding.destroy(node));
       this._nodesToBinds.delete(node);
 
+      if (depth >= MAX_UNBIND_DEPTH) {
+        return;
+      }
+
       const remainingNodes = Array.from(this._nodesToBinds.keys()).filter((remainingNode) =>
         node.contains(remainingNode)
       );
 
       if (remainingNodes.length) {
-        this._unbindNodes(remainingNodes);
+        this._unbindNodes(remainingNodes, depth + 1);
       }
     });
   }

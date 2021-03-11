@@ -17,6 +17,7 @@ class Binding {
     }
 }
 
+const MAX_UNBIND_DEPTH = 1;
 class Necktie {
     constructor(_window = window, _document = document) {
         this._window = _window;
@@ -100,7 +101,7 @@ class Necktie {
             }
         });
     }
-    _unbindNodes(nodes) {
+    _unbindNodes(nodes, depth = 0) {
         nodes.forEach((node) => {
             if (node.nodeType !== Node.ELEMENT_NODE) {
                 return;
@@ -108,9 +109,12 @@ class Necktie {
             const binds = this._nodesToBinds.get(node) || [];
             binds.forEach((binding) => binding.destroy(node));
             this._nodesToBinds.delete(node);
+            if (depth >= MAX_UNBIND_DEPTH) {
+                return;
+            }
             const remainingNodes = Array.from(this._nodesToBinds.keys()).filter((remainingNode) => node.contains(remainingNode));
             if (remainingNodes.length) {
-                this._unbindNodes(remainingNodes);
+                this._unbindNodes(remainingNodes, depth + 1);
             }
         });
     }
