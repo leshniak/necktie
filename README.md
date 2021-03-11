@@ -58,7 +58,7 @@ The library comes with CJS, ESM and UMD modules. **TypeScript** types are also a
 | --------------------------------------------------------------------- | ---                                                     |
 | `constructor(element?: Element): this`                                | Creates a new `Bindable` instance.                      |
 |                                                                       |                                                         |
-| `destroy(removedElement? Element): void`                              | A clean up method, called when a DOM element has been removed. |
+| `destroy(removedElement?: Element): void`                             | A clean up method, called when a DOM element has been removed. |
 
 #### `Callback` function
 `(element?: Element) => ((removedElement?: Element) => void) | void` – a function fired when a proper `Element` has been found. Optionally it can return a clean up function that will be fired when the element will disappear from the DOM.

@@ -100,7 +100,7 @@ export class Necktie {
       const binds: Array<Binding> = [];
 
       for (const [selector, callbacks] of this._selectorsToCallbacks.entries()) {
-        const isMatch = (node as HTMLElement).matches(selector);
+        const isMatch = (node as Element).matches(selector);
 
         if (!isMatch) {
           continue;
