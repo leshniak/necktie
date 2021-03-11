@@ -112,9 +112,9 @@ class Necktie {
             if (depth >= MAX_UNBIND_DEPTH) {
                 return;
             }
-            const remainingNodes = Array.from(this._nodesToBinds.keys()).filter((remainingNode) => node.contains(remainingNode));
-            if (remainingNodes.length) {
-                this._unbindNodes(remainingNodes, depth + 1);
+            const childNodes = Array.from(this._nodesToBinds.keys()).filter((bindedNode) => node.contains(bindedNode));
+            if (childNodes.length) {
+                this._unbindNodes(childNodes, depth + 1);
             }
         });
     }

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.5
+- Cosmetic changes - variables renaming
+
 ## 1.0.4
 - Fixes node type check while rebinding
 
