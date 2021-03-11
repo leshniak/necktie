@@ -5,6 +5,6 @@ export declare class Binding {
     private readonly _unbindCallback;
     constructor(selector: string, bindCallback: Callback, unbindCallback: ReturnType<Callback>);
     hasSameCallback(callback: Callback): boolean;
-    match(node: Node): boolean;
-    destroy(node: Node): void;
+    match(element: Element): boolean;
+    destroy(element: Element): void;
 }

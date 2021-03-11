@@ -11,12 +11,12 @@ class Binding {
     hasSameCallback(callback) {
         return this._callback === callback;
     }
-    match(node) {
-        return node.matches(this._selector);
+    match(element) {
+        return element.matches(this._selector);
     }
-    destroy(node) {
+    destroy(element) {
         if (typeof this._unbindCallback === 'function') {
-            this._unbindCallback(node);
+            this._unbindCallback(element);
         }
     }
 }
@@ -57,10 +57,10 @@ class Necktie {
         return this;
     }
     bindClass(selector, Bindable) {
-        return this.bind(selector, (node) => {
-            const bindable = new Bindable(node);
-            return (destroyedNode) => {
-                bindable.destroy(destroyedNode);
+        return this.bind(selector, (element) => {
+            const bindable = new Bindable(element);
+            return (removedElement) => {
+                bindable.destroy(removedElement);
             };
         });
     }
@@ -116,9 +116,9 @@ class Necktie {
             if (depth >= MAX_UNBIND_DEPTH) {
                 return;
             }
-            const childNodes = Array.from(this._nodesToBinds.keys()).filter((bindedNode) => node.contains(bindedNode));
-            if (childNodes.length) {
-                this._unbindNodes(childNodes, depth + 1);
+            const bindedChildNodes = Array.from(this._nodesToBinds.keys()).filter((bindedNode) => node.contains(bindedNode));
+            if (bindedChildNodes.length) {
+                this._unbindNodes(bindedChildNodes, depth + 1);
             }
         });
     }

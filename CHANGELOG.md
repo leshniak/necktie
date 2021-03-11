@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.0
+- Changes element typing from `Node` to `Element`
+
 ## 1.0.5
 - Cosmetic changes - variables renaming
 

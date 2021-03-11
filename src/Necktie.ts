@@ -56,11 +56,11 @@ export class Necktie {
   }
 
   public bindClass(selector: string, Bindable: Bindable) {
-    return this.bind(selector, (node) => {
-      const bindable = new Bindable(node);
+    return this.bind(selector, (element) => {
+      const bindable = new Bindable(element);
 
-      return (destroyedNode) => {
-        bindable.destroy(destroyedNode);
+      return (removedElement) => {
+        bindable.destroy(removedElement);
       };
     });
   }
@@ -107,7 +107,7 @@ export class Necktie {
         }
 
         for (const callback of callbacks.values()) {
-          binds.push(new Binding(selector, callback, callback(node)));
+          binds.push(new Binding(selector, callback, callback(node as Element)));
         }
       }
 
@@ -125,17 +125,17 @@ export class Necktie {
 
       const binds = this._nodesToBinds.get(node) || [];
 
-      binds.forEach((binding) => binding.destroy(node));
+      binds.forEach((binding) => binding.destroy(node as Element));
       this._nodesToBinds.delete(node);
 
       if (depth >= MAX_UNBIND_DEPTH) {
         return;
       }
 
-      const childNodes = Array.from(this._nodesToBinds.keys()).filter((bindedNode) => node.contains(bindedNode));
+      const bindedChildNodes = Array.from(this._nodesToBinds.keys()).filter((bindedNode) => node.contains(bindedNode));
 
-      if (childNodes.length) {
-        this._unbindNodes(childNodes, depth + 1);
+      if (bindedChildNodes.length) {
+        this._unbindNodes(bindedChildNodes, depth + 1);
       }
     });
   }
@@ -146,10 +146,10 @@ export class Necktie {
     }
 
     const binds = this._nodesToBinds.get(node) || [];
-    const matchedBinds = binds.filter((binding) => binding.match(node));
-    const unmatchedBinds = binds.filter((binding) => !binding.match(node));
+    const matchedBinds = binds.filter((binding) => binding.match(node as Element));
+    const unmatchedBinds = binds.filter((binding) => !binding.match(node as Element));
 
-    unmatchedBinds.forEach((binding) => binding.destroy(node));
+    unmatchedBinds.forEach((binding) => binding.destroy(node as Element));
 
     for (const [selector, callbacks] of this._selectorsToCallbacks.entries()) {
       const isMatch = (node as HTMLElement).matches(selector);
@@ -162,7 +162,7 @@ export class Necktie {
         const isNewCallback = !matchedBinds.find((binding) => binding.hasSameCallback(callback));
 
         if (isNewCallback) {
-          matchedBinds.push(new Binding(selector, callback, callback(node)));
+          matchedBinds.push(new Binding(selector, callback, callback(node as Element)));
         }
       }
     }

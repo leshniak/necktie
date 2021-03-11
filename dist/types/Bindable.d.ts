@@ -1,4 +1,4 @@
 export interface Bindable {
-    new (node?: Node): this;
-    destroy(node?: Node): void;
+    new (element?: Element): this;
+    destroy(element?: Element): void;
 }

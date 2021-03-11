@@ -15,13 +15,13 @@ export class Binding {
     return this._callback === callback;
   }
 
-  public match(node: Node) {
-    return (node as HTMLElement).matches(this._selector);
+  public match(element: Element) {
+    return element.matches(this._selector);
   }
 
-  public destroy(node: Node) {
+  public destroy(element: Element) {
     if (typeof this._unbindCallback === 'function') {
-      this._unbindCallback(node);
+      this._unbindCallback(element);
     }
   }
 }
