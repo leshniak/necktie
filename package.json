@@ -1,5 +1,6 @@
 {
   "name": "@lesniewski.pro/necktie",
+  "description": "A tool that binds your logic to the Document Object Model elements in an easy way",
   "version": "1.0.4",
   "main": "dist/necktie.cjs.js",
   "module": "dist/necktie.esm.js",
