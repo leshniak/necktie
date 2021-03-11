@@ -123,6 +123,9 @@ class Necktie {
         });
     }
     _rebindNode(node) {
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+            return;
+        }
         const binds = this._nodesToBinds.get(node) || [];
         const matchedBinds = binds.filter((binding) => binding.match(node));
         const unmatchedBinds = binds.filter((binding) => !binding.match(node));
