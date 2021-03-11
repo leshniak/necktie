@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.4
+- Fixes node type check while rebinding
+
 ## 1.0.3
 - Optimizes unbinding recursion
 
