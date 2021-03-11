@@ -26,6 +26,8 @@ tie.bind('.form-component input[data-name]', (element) => {
 
 `Necktie` is meant for mostly static pages, but should work also in SPA model, although it may be CPU-expensive, especially using `observeAttributes()`.
 
+**[Give it a try!](https://codesandbox.io/s/necktie-sandbox-bh5gn)**
+
 
 ## Installation
 

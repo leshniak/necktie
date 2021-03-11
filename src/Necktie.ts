@@ -152,7 +152,7 @@ export class Necktie {
     unmatchedBinds.forEach((binding) => binding.destroy(node as Element));
 
     for (const [selector, callbacks] of this._selectorsToCallbacks.entries()) {
-      const isMatch = (node as HTMLElement).matches(selector);
+      const isMatch = (node as Element).matches(selector);
 
       if (!isMatch) {
         continue;
