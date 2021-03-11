@@ -132,12 +132,10 @@ export class Necktie {
         return;
       }
 
-      const remainingNodes = Array.from(this._nodesToBinds.keys()).filter((remainingNode) =>
-        node.contains(remainingNode)
-      );
+      const childNodes = Array.from(this._nodesToBinds.keys()).filter((bindedNode) => node.contains(bindedNode));
 
-      if (remainingNodes.length) {
-        this._unbindNodes(remainingNodes, depth + 1);
+      if (childNodes.length) {
+        this._unbindNodes(childNodes, depth + 1);
       }
     });
   }
