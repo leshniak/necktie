@@ -32,6 +32,7 @@ necktie.bind('.form-component input[data-name]', (node) => {
 Using:
 - npm: `npm install @lesniewski.pro/necktie`
 - yarn: `yarn add @lesniewski.pro/necktie`
+- jsDelivr (embed directly in your HTML file): https://www.jsdelivr.com/package/npm/@lesniewski.pro/necktie
 
 
 ## Documentation
