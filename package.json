@@ -59,15 +59,17 @@
     "dom",
     "binding",
     "browser",
-    "mutation",
-    "selector"
+    "mutationobserver",
+    "selector",
+    "dom-manipulation"
   ],
   "keywords": [
     "typescript",
     "dom",
     "binding",
     "browser",
-    "mutation",
-    "selector"
+    "mutationobserver",
+    "selector",
+    "dom-manipulation"
   ]
 }

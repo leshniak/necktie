@@ -1,6 +1,11 @@
 # 👔 Necktie – a simple DOM binding tool
 
-`Necktie` is a library that binds your logic to the **Document Object Model** elements in an easy way. It has only `~ 3kB` (UMD, minified).
+`Necktie` is a library that binds your logic to the **Document Object Model** elements in an easy way. It has only `~3kB` (UMD, minified).
+
+[![version](https://img.shields.io/npm/v/%40lesniewski.pro/necktie.svg)](http://npm.im/%40lesniewski.pro/necktie)
+[![downloads](https://img.shields.io/npm/dm/%40lesniewski.pro/necktie.svg)](http://npm-stat.com/charts.html?package=%40lesniewski.pro/necktie)
+[![MIT License](https://img.shields.io/npm/l/%40lesniewski.pro/necktie.svg)](http://opensource.org/licenses/MIT)
+[![jsDelivr hits](https://data.jsdelivr.com/v1/package/npm/@lesniewski.pro/necktie/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@lesniewski.pro/necktie)
 
 
 ## How it works
@@ -68,7 +73,7 @@ The library comes with CJS, ESM and UMD modules. **TypeScript** types are also a
 
 ## TO DO
 - [x] Initial release
-- [ ] Unit tests
+- [x] Unit tests
 - [ ] CI automation
 
 
