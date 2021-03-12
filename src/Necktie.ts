@@ -1,6 +1,6 @@
-import { Bindable } from './Bindable';
-import { Binding } from './Binding';
-import { Callback } from './Callback';
+import { Bindable } from '@lib/Bindable';
+import { Binding } from '@lib/Binding';
+import { Callback } from '@lib/Callback';
 
 const MAX_UNBIND_DEPTH = 1;
 

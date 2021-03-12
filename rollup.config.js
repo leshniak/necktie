@@ -15,7 +15,7 @@ const tsPluginConfig = {
 export default [
 	// browser-friendly UMD build
 	{
-		input: 'src/main.ts',
+		input: 'src/index.ts',
 		output: {
 			name: 'necktie',
 			file: pkg.browser,
@@ -35,7 +35,7 @@ export default [
 	// an array for the `output` option, where we can specify
 	// `file` and `format` for each target)
 	{
-		input: 'src/main.ts',
+		input: 'src/index.ts',
 		external: Object.keys(externals),
 		plugins: [
       typescript(tsPluginConfig) // so Rollup can convert TypeScript to JavaScript

@@ -1,4 +1,4 @@
-import { Callback } from './Callback';
+import { Callback } from '@lib/Callback';
 export declare class Binding {
     private readonly _selector;
     private readonly _callback;

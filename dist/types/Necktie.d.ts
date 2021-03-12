@@ -1,5 +1,5 @@
-import { Bindable } from './Bindable';
-import { Callback } from './Callback';
+import { Bindable } from '@lib/Bindable';
+import { Callback } from '@lib/Callback';
 export declare class Necktie {
     private readonly _window;
     private readonly _document;
