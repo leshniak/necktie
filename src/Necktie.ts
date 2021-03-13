@@ -135,11 +135,7 @@ export class Necktie {
       return;
     }
 
-    const binds = this._nodesToBinds.get(node);
-
-    if (!binds) {
-      return;
-    }
+    const binds = this._nodesToBinds.get(node) || [];
 
     const matchedBinds = binds.filter((binding) => binding.match(node as Element));
     const unmatchedBinds = binds.filter((binding) => !binding.match(node as Element));

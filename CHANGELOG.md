@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.3
+- Fixes rebinding for new nodes
+
 ## 1.1.2
 - Optimizes unbinding (gets rid of recursion) and rebinding
 
