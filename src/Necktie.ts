@@ -2,8 +2,6 @@ import { Bindable } from '@lib/Bindable';
 import { Binding } from '@lib/Binding';
 import { Callback } from '@lib/Callback';
 
-const MAX_UNBIND_DEPTH = 1;
-
 export class Necktie {
   private readonly _window: Window;
   private readonly _document: Document;
@@ -117,25 +115,17 @@ export class Necktie {
     });
   }
 
-  private _unbindNodes(nodes: NodeList | Array<Node>, depth = 0) {
-    nodes.forEach((node: Node) => {
+  private _unbindNodes(nodes: NodeList) {
+    nodes.forEach((node) => {
       if (node.nodeType !== Node.ELEMENT_NODE) {
         return;
       }
 
-      const binds = this._nodesToBinds.get(node) || [];
-
-      binds.forEach((binding) => binding.destroy(node as Element));
-      this._nodesToBinds.delete(node);
-
-      if (depth >= MAX_UNBIND_DEPTH) {
-        return;
-      }
-
-      const bindedChildNodes = Array.from(this._nodesToBinds.keys()).filter((bindedNode) => node.contains(bindedNode));
-
-      if (bindedChildNodes.length) {
-        this._unbindNodes(bindedChildNodes, depth + 1);
+      for (const [bindedNode, binds] of this._nodesToBinds.entries()) {
+        if (node.contains(bindedNode)) {
+          binds.forEach((binding) => binding.destroy(node as Element));
+          this._nodesToBinds.delete(bindedNode);
+        }
       }
     });
   }
@@ -145,7 +135,12 @@ export class Necktie {
       return;
     }
 
-    const binds = this._nodesToBinds.get(node) || [];
+    const binds = this._nodesToBinds.get(node);
+
+    if (!binds) {
+      return;
+    }
+
     const matchedBinds = binds.filter((binding) => binding.match(node as Element));
     const unmatchedBinds = binds.filter((binding) => !binding.match(node as Element));
 

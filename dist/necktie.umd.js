@@ -23,7 +23,6 @@
       }
   }
 
-  const MAX_UNBIND_DEPTH = 1;
   class Necktie {
       constructor(_window = window, _document = document) {
           this._window = _window;
@@ -107,20 +106,16 @@
               }
           });
       }
-      _unbindNodes(nodes, depth = 0) {
+      _unbindNodes(nodes) {
           nodes.forEach((node) => {
               if (node.nodeType !== Node.ELEMENT_NODE) {
                   return;
               }
-              const binds = this._nodesToBinds.get(node) || [];
-              binds.forEach((binding) => binding.destroy(node));
-              this._nodesToBinds.delete(node);
-              if (depth >= MAX_UNBIND_DEPTH) {
-                  return;
-              }
-              const bindedChildNodes = Array.from(this._nodesToBinds.keys()).filter((bindedNode) => node.contains(bindedNode));
-              if (bindedChildNodes.length) {
-                  this._unbindNodes(bindedChildNodes, depth + 1);
+              for (const [bindedNode, binds] of this._nodesToBinds.entries()) {
+                  if (node.contains(bindedNode)) {
+                      binds.forEach((binding) => binding.destroy(node));
+                      this._nodesToBinds.delete(bindedNode);
+                  }
               }
           });
       }
@@ -128,7 +123,10 @@
           if (node.nodeType !== Node.ELEMENT_NODE) {
               return;
           }
-          const binds = this._nodesToBinds.get(node) || [];
+          const binds = this._nodesToBinds.get(node);
+          if (!binds) {
+              return;
+          }
           const matchedBinds = binds.filter((binding) => binding.match(node));
           const unmatchedBinds = binds.filter((binding) => !binding.match(node));
           unmatchedBinds.forEach((binding) => binding.destroy(node));
