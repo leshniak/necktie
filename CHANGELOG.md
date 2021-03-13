@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2
+- Optimizes unbinding (gets rid of recursion) and rebinding
+
+## 1.1.1
+- Updates package README
+
 ## 1.1.0
 - Changes element typing from `Node` to `Element`
 
