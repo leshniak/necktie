@@ -4,8 +4,8 @@
 
 [![version](https://img.shields.io/npm/v/%40lesniewski.pro/necktie.svg)](http://npm.im/%40lesniewski.pro/necktie)
 [![downloads](https://img.shields.io/npm/dm/%40lesniewski.pro/necktie.svg)](http://npm-stat.com/charts.html?package=%40lesniewski.pro/necktie)
-[![MIT License](https://img.shields.io/npm/l/%40lesniewski.pro/necktie.svg)](http://opensource.org/licenses/MIT)
 [![jsDelivr hits](https://data.jsdelivr.com/v1/package/npm/@lesniewski.pro/necktie/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@lesniewski.pro/necktie)
+[![MIT License](https://img.shields.io/npm/l/%40lesniewski.pro/necktie.svg)](http://opensource.org/licenses/MIT)
 
 
 ## How it works
@@ -75,6 +75,10 @@ The library comes with CJS, ESM and UMD modules. **TypeScript** types are also a
 - [x] Initial release
 - [x] Unit tests
 - [ ] CI automation
+
+
+## Sponsorship
+If you appreciate my work, it will be cool to know that I drink my **[coffee ☕](https://www.buymeacoffee.com/leshniak)** thanks to you!
 
 
 ## License
