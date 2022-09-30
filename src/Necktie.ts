@@ -13,7 +13,7 @@ export class Necktie {
   private _areAttributesObserved: boolean;
   private _isListening: boolean;
 
-  public constructor(parent = document, _window = window, _document = document) {
+  public constructor(parent: ParentNode = document, _window = window, _document = document) {
     this._parent = parent;
     this._window = _window;
     this._document = _document;

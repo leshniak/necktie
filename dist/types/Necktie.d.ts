@@ -10,7 +10,7 @@ export declare class Necktie {
     private _mutationObserver;
     private _areAttributesObserved;
     private _isListening;
-    constructor(parent?: Document, _window?: Window & typeof globalThis, _document?: Document);
+    constructor(parent?: ParentNode, _window?: Window & typeof globalThis, _document?: Document);
     bind(selector: string, callback: Callback): this;
     bindClass(selector: string, Bindable: Bindable): this;
     observeAttributes(isEnabled?: boolean): this;
