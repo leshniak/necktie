@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+- Adds an option to provide a custom parent node in the constructor
+- Adds a method to stop listening for DOM changes – stopListening()
+
 ## 1.1.3
 - Fixes rebinding for new nodes
 

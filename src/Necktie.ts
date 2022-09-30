@@ -3,15 +3,18 @@ import { Binding } from '@lib/Binding';
 import { Callback } from '@lib/Callback';
 
 export class Necktie {
+  private readonly _parent: ParentNode;
   private readonly _window: Window;
   private readonly _document: Document;
   private readonly _selectorsToCallbacks: Map<string, Set<Callback>>;
   private readonly _nodesToBinds: Map<Node, Array<Binding>>;
   private readonly _dummyFragment: DocumentFragment;
+  private _mutationObserver: MutationObserver;
   private _areAttributesObserved: boolean;
   private _isListening: boolean;
 
-  public constructor(_window = window, _document = document) {
+  public constructor(parent = document, _window = window, _document = document) {
+    this._parent = parent;
     this._window = _window;
     this._document = _document;
     this._selectorsToCallbacks = new Map();
@@ -19,6 +22,20 @@ export class Necktie {
     this._dummyFragment = this._document.createDocumentFragment();
     this._areAttributesObserved = false;
     this._isListening = false;
+
+    this._mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        switch (mutation.type) {
+          case 'attributes':
+            this._rebindNode(mutation.target);
+            break;
+          case 'childList':
+            this._unbindNodes(mutation.removedNodes);
+            this._bindNodes(mutation.addedNodes);
+            break;
+        }
+      });
+    });
   }
 
   public bind(selector: string, callback: Callback) {
@@ -41,7 +58,7 @@ export class Necktie {
     this._selectorsToCallbacks.get(selector)!.add(callback);
 
     if (this._isListening) {
-      this._document.querySelectorAll(selector).forEach((node) => {
+      this._parent.querySelectorAll(selector).forEach((node) => {
         if (!this._nodesToBinds.has(node)) {
           this._nodesToBinds.set(node, []);
         }
@@ -76,6 +93,14 @@ export class Necktie {
   public startListening() {
     this._bindToDOM();
     this._isListening = true;
+
+    return this;
+  }
+
+  public stopListening() {
+    this._window.removeEventListener('unload', this._onDocumentUnload);
+    this._mutationObserver.disconnect();
+    this._isListening = false;
 
     return this;
   }
@@ -167,34 +192,25 @@ export class Necktie {
 
   private _bindToDOM() {
     const aggregatedSelector = Array.from(this._selectorsToCallbacks.keys()).join(',');
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        switch (mutation.type) {
-          case 'attributes':
-            this._rebindNode(mutation.target);
-            break;
-          case 'childList':
-            this._unbindNodes(mutation.removedNodes);
-            this._bindNodes(mutation.addedNodes);
-            break;
-        }
-      });
-    });
 
     if (aggregatedSelector) {
-      const matchedNodes = this._document.querySelectorAll(aggregatedSelector);
+      const matchedNodes = this._parent.querySelectorAll(aggregatedSelector);
 
       this._bindNodes(matchedNodes);
     }
 
-    observer.observe(this._document, {
+    this._mutationObserver.observe((this._parent as unknown) as Node, {
       childList: true,
       subtree: true,
       attributes: this._areAttributesObserved,
     });
 
-    this._window.addEventListener('unload', () => {
-      observer.disconnect();
-    });
+    this._window.addEventListener('unload', this._onDocumentUnload);
   }
+
+  private _onDocumentUnload = () => {
+    if (this._isListening) {
+      this._mutationObserver.disconnect();
+    }
+  };
 }

@@ -53,12 +53,13 @@ The library comes with CJS, ESM and UMD modules. **TypeScript** types are also a
 #### `Necktie` class 
 | Method                                                                 | Description                                             |
 | ---------------------------------------------------------------------- | ---                                                     |
-| `constructor(): this`                                                  | Creates a new Necktie instance.                         |
+| `constructor(parent?: ParentNode): this`                               | Creates a new Necktie instance. Optionally provide a custom parent node (defaults to the root document node). |
 |                                                                        |                                                         |
 | `bind(selector: string, callback: Callback): this`                     | Binds a callback function with a given selector.        |
 | `bindClass(selector: string, BindableComponent: Bindable): this`       | Binds a `Bindable` class with a given selector.         |
 | `observeAttributes(isEnabled?: boolean): this`                         | Looks for attributes changes, for example `class` or `data-*`. Rebinds registered functions if necessary. **WARNING!** Use with caution, this may be expensive. |
-| `startListening(): this`                                               | Runs callbacks or `Bindable` classes on registered selectors, starts listening for DOM changes. |
+| `startListening(): this`                                               | Runs callbacks or `Bindable` classes on registered selectors, starts listening for DOM changes. 
+| `stopListening(): this`                                                | Stops observing DOM changes.                            |
 
 #### `Bindable` class
 | Method                                                                | Description                                             |

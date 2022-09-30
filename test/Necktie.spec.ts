@@ -4,7 +4,7 @@ import { Necktie } from '@lib/Necktie';
 import { emptyDocument, exampleDocument } from './contentMocks';
 
 const getInstance = (doc: JSDOM) =>
-  new Necktie((doc.window as unknown) as Window & typeof globalThis, doc.window.document);
+  new Necktie(doc.window.document, (doc.window as unknown) as Window & typeof globalThis, doc.window.document);
 
 describe('Necktie', () => {
   let mutationObserverContexts: Array<MutationObserverMock>;
